@@ -1,0 +1,160 @@
+<!DOCTPYE html>
+<html>
+	<title>Javascript Game</title>
+  <meta charset = "utf-8">
+	<style>
+		canvas{
+			border : 1px dotted red;
+			background-color : #fcf00;
+		}
+	</style>
+	<script>
+		var context;
+		var velocity;
+		var angle;
+		var ballV = 0;
+		var ballVx = 0;
+		var ballVy = 0;
+		var ballX = 10;
+		var ballY = 250;
+        var netX = 450;
+        var netY = 60;
+		var ballRadius = 10;
+		var score = 0;
+        var isShoot = false;
+        var percent = 0;
+        var netspeed;
+        var count = prompt("발사 횟수", 3);
+        var shooting = 0;
+		var image = new Image();
+		image.src = "image/lawn.png";
+		var backimage = new Image();
+		backimage.src = "image/net.png";
+		var timer;
+
+		function drawBall(){
+			context.beginPath();
+			context.arc(ballX, ballY, ballRadius, 0, 2.0 * Math.PI, true);
+			context.fillStyle = "red";
+			context.fill();
+		}
+
+		function drawBackground(){
+			context.drawImage(image, 0, 270);
+      context.drawImage(backimage, netX, netY);
+		}
+
+		function draw(){
+			context.clearRect(0, 0, 500, 300);
+			drawBall();
+			drawBackground();
+		}
+
+		function init(){
+      document.getElementById("count").innerHTML = "남은 횟수 : "+count;
+			ballV = 0;
+			ballVx = 0;
+			ballVy = 0;
+			ballX = 10;
+			ballY = 250;
+			ballRadius = 10;
+			context = document.getElementById('canvas').getContext('2d');
+      netspeed = Math.floor((Math.random() * 10) + 1);
+      timer = setInterval(calculate, 100);
+      var tt = setInterval(conflict,1);
+      draw();
+		}
+    function conflict(){
+      if(isShoot)
+      {
+        console.log(Math.floor(ballX));
+        console.log(Math.floor(ballY));
+        if((ballX >= netX) && (ballY >= netY) && (ballY <= netY+150))
+        {
+          score++;
+          document.getElementById("score").innerHTML = "점수 = "+score;
+          percent = score/shooting * 100;
+          document.getElementById("percent").innerHTML = "득점률 = "+percent;
+          clearInterval(timer);
+          isShoot = false;
+          if(count <= 0)
+            {
+              alert("게임 종료!");
+              alert("점수 : "+score);
+              alert("득점률 : "+percent);
+              var reload = confirm("다시 하시겠습니까?");
+              if(reload)
+                location.reload();
+              else
+                window.close();
+            }
+          init();
+        }
+
+        if(ballY >= 300 || ballY < 0 || ballX >=600)
+        {
+          clearInterval(timer);
+          isShoot = false;
+          if(count <= 0)
+            {
+              alert("게임 종료!");
+              alert("점수 : "+score);
+              alert("득점률 : "+percent);
+              var reload = confirm("다시 하시겠습니까?");
+              if(reload)
+                location.reload();
+              else
+                window.close();
+            }
+          init();
+        }
+    }
+  }
+		function start(){
+      if(isShoot == false && count != 0)
+      {
+          shooting++;
+          velocity = Number(document.getElementById('velocity').value);
+    			angle = Number(document.getElementById('angle').value);
+    			var angleR = angle * Math.PI / 100;
+
+
+    			ballVx = velocity * Math.cos(angleR);
+    			ballVy = -velocity * Math.sin(angleR);
+
+
+          count--;
+          document.getElementById("count").innerHTML = "남은 횟수 : "+count;
+          isShoot = true;
+      }
+			return false;
+		}
+		function calculate(){
+      if(isShoot)
+      {
+        ballVy = ballVy + 1.98;
+        ballX = ballX + ballVx;
+        ballY = ballY + ballVy;
+      }
+      netY+=netspeed;
+      if(netY >105)
+      netspeed*=-1;
+      if(netY <0)
+      netspeed *=-1;
+      draw();
+
+}
+	</script>
+</head>
+<body onload="init();">
+	<canvas id = "canvas" width = "500" height = "300"></canvas>
+	<div id="control">
+		속도<input id="velocity" value="30" type="number" min="0" max="100" step="1"/>
+		각도<input id="angle" value="40" type="number" min="0" max="90" step="1"/>
+		<div id="score">점수 = 0</div>
+    <div id="count">횟수 = 0</div>
+    <div id="percent">득점률 = 0</div>
+		<button onclick="start()">발사</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+.monitor{
+  width:100vw;
+  height:30vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.moniBox{
+  z-index:0;
+  position:absolute;
+}
+#hero1{
+  opacity:0;
+}
+.heroBox{
+  margin-top:-6vh;
+  z-index:1;
+  position:relative;
+}
+.keyboard{
+  width:100vw;
+  height:30vh;
+
+  z-index:0;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.humon{
+    width:100vw;
+    height:20vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1;
+    position:relative;
+    margin-top:-10vh;
+}
+
+.bodyBox{
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  z-index:0;
+}
+.heosBox{
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  z-index:1;
+}
+
+#none{
+  display:none;
+}
+
+.effect{
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:scale(5,5);
+}
+
+.phone{
+  width:100vw;
+  height:20vh;
+  z-index:2;
+  position:relative;
+  margin-top:-20vh;
+}
+.phoneBox{
+  position:absolute;
+  z-index:0;
+  float:right;
+}
+.pBox{
+  margin-top:10vh;
+  margin-left:2vw;
+  float:right;
+  position:absolute;
+  z-index:1;
+}
+#phone{
+  z-index = 3;
+  margin-right:5vw;
+  height:40vh;
+  float:right;
+  position: relative;
+}
+#player{
+  z-index = 4;
+  margin-right:5vw;
+  height:40vh;
+  float:right;
+  position: relative;
+}
+#pat{
+  margin-left:
+  height:40vh;
+  float:left;
+}
+
+.flexBox{
+  width:100vw;
+  height:30vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#keyboard{
+  z-index:0;
+  position:relative;;
+}
+
+
+#people{
+
+  z-index:1;
+  position:relative;
+}
+.click{
+     width:110vw;
+  height:40vh;
+
+  z-index:0;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
